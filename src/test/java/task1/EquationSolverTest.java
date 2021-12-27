@@ -11,7 +11,7 @@ public class EquationSolverTest {
     @Test
     @DisplayName("Test for check if roots is not exist")
     public void rootsIsNotExist() {
-        double[] roots = equationSolver.solve(1, 0, 1, EPSILON);
+        double[] roots = equationSolver.solve(1, 2, 1, EPSILON);
         Assertions.assertEquals(0, roots.length);
     }
 
