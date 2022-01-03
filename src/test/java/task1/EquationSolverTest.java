@@ -18,7 +18,7 @@ public class EquationSolverTest {
     @Test
     @DisplayName("Test for check if exist two roots")
     public void existTwoRoots() {
-        double[] roots = equationSolver.solve(1, 0, -1, EPSILON);
+        double[] roots = equationSolver.solve(1, 1, -1, EPSILON);
         Assertions.assertEquals(2, roots.length);
         Assertions.assertEquals(-1.0, roots[0]);
         Assertions.assertEquals(1.0, roots[1]);
