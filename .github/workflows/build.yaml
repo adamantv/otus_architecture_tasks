@@ -19,5 +19,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: Maven Verify
+      - name: Maven Verify and running tests
         run: mvn -B clean verify
