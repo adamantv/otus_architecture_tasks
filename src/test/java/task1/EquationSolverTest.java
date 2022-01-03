@@ -116,7 +116,6 @@ public class EquationSolverTest {
     @Test
     @DisplayName("Test for check if c is POSITIVE_INFINITY")
     public void checkCIsPositiveInfinity() {
-        System.out.println("2020-12-26T15:37:42Z".length());
         Assertions.assertThrows(
                 IllegalCoefficientException.class,
                 () -> equationSolver.solve(Double.POSITIVE_INFINITY, 1, 1, EPSILON)
