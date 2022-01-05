@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import task2.actions.movement.Movable;
 import task2.actions.movement.MovableAdapter;
 import task2.actions.movement.MoveCommand;
-import task2.actions.rotation.RolableAdapter;
 import task2.actions.rotation.Rotable;
+import task2.actions.rotation.RotableAdapter;
 import task2.elements.GameElement;
 import task2.exception.IllegalParameterException;
 import task2.exception.UnsupportedCommandException;
@@ -59,7 +59,7 @@ public class MoveCommandTest {
     public void impossibleChangePosition() {
         GameElement gameElement = new GameElement();
         gameElement.setProperty("position", new Vector(-7, 3));
-        Rotable rotable = new RolableAdapter(gameElement);
+        Rotable rotable = new RotableAdapter(gameElement);
         MoveCommand moveCommand = new MoveCommand();
         Throwable throwable = Assertions.assertThrows(
                 UnsupportedCommandException.class,

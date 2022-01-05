@@ -2,11 +2,11 @@ package task2.actions.rotation;
 
 import task2.elements.UObject;
 
-public class RolableAdapter implements Rotable {
+public class RotableAdapter implements Rotable {
     UObject uObject;
 
-    public RolableAdapter(UObject m) {
-        this.uObject = m;
+    public RotableAdapter(UObject uObject) {
+        this.uObject = uObject;
     }
 
     @Override
