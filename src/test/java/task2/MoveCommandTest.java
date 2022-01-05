@@ -16,7 +16,7 @@ import task2.util.Vector;
 public class MoveCommandTest {
     @Test
     @DisplayName("Try to change position for object with given coordinates")
-    public void test1() {
+    public void changePosition() {
         GameElement gameElement = new GameElement();
         gameElement.setProperty("velocity", new Vector(12, 5));
         gameElement.setProperty("position", new Vector(-7, 3));
