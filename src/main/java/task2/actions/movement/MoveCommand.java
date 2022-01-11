@@ -5,12 +5,15 @@ import task2.exception.UnsupportedCommandException;
 import task2.util.Vector;
 
 public class MoveCommand implements Command {
-    public MoveCommand() {
+    private Object ability;
+
+    public MoveCommand(Object ability) {
+        this.ability = ability;
     }
 
     @Override
-    public void execute(Object object) {
-        if (object instanceof Movable movable) {
+    public void execute() {
+        if (ability instanceof Movable movable) {
             movable.setPosition(Vector.sum(movable.getPosition(), movable.getVelocity()));
         } else {
             throw new UnsupportedCommandException("Movable is not supported");

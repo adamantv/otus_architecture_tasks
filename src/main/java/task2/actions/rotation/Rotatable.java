@@ -1,6 +1,6 @@
 package task2.actions.rotation;
 
-public interface Rotable {
+public interface Rotatable {
     int getDirection();
 
     void setDirection(int direction);

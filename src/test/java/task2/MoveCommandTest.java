@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import task2.actions.movement.Movable;
 import task2.actions.movement.MovableAdapter;
 import task2.actions.movement.MoveCommand;
-import task2.actions.rotation.Rotable;
-import task2.actions.rotation.RotableAdapter;
+import task2.actions.rotation.Rotatable;
+import task2.actions.rotation.RotatableAdapter;
 import task2.elements.GameElement;
 import task2.exception.IllegalParameterException;
 import task2.exception.UnsupportedCommandException;
@@ -21,8 +21,8 @@ public class MoveCommandTest {
         gameElement.setProperty("velocity", new Vector(12, 5));
         gameElement.setProperty("position", new Vector(-7, 3));
         Movable movable = new MovableAdapter(gameElement);
-        MoveCommand moveCommand = new MoveCommand();
-        moveCommand.execute(movable);
+        MoveCommand moveCommand = new MoveCommand(movable);
+        moveCommand.execute();
         Assertions.assertEquals(movable.getPosition(), new Vector(5, 8));
     }
 
@@ -32,10 +32,10 @@ public class MoveCommandTest {
         GameElement gameElement = new GameElement();
         gameElement.setProperty("velocity", new Vector(12, 5));
         Movable movable = new MovableAdapter(gameElement);
-        MoveCommand moveCommand = new MoveCommand();
+        MoveCommand moveCommand = new MoveCommand(movable);
         Throwable throwable = Assertions.assertThrows(
                 IllegalParameterException.class,
-                () -> moveCommand.execute(movable)
+                moveCommand::execute
         );
         Assertions.assertEquals(throwable.getMessage(), "position");
     }
@@ -46,10 +46,10 @@ public class MoveCommandTest {
         GameElement gameElement = new GameElement();
         gameElement.setProperty("position", new Vector(-7, 3));
         Movable movable = new MovableAdapter(gameElement);
-        MoveCommand moveCommand = new MoveCommand();
+        MoveCommand moveCommand = new MoveCommand(movable);
         Throwable throwable = Assertions.assertThrows(
                 IllegalParameterException.class,
-                () -> moveCommand.execute(movable)
+                moveCommand::execute
         );
         Assertions.assertEquals(throwable.getMessage(), "velocity");
     }
@@ -59,11 +59,11 @@ public class MoveCommandTest {
     public void impossibleChangePosition() {
         GameElement gameElement = new GameElement();
         gameElement.setProperty("position", new Vector(-7, 3));
-        Rotable rotable = new RotableAdapter(gameElement);
-        MoveCommand moveCommand = new MoveCommand();
+        Rotatable rotatable = new RotatableAdapter(gameElement);
+        MoveCommand moveCommand = new MoveCommand(rotatable);
         Throwable throwable = Assertions.assertThrows(
                 UnsupportedCommandException.class,
-                () -> moveCommand.execute(rotable)
+                moveCommand::execute
         );
         Assertions.assertEquals(throwable.getMessage(), "Movable is not supported");
     }

@@ -4,7 +4,7 @@ import task2.elements.UObject;
 import task2.util.Vector;
 
 public class MovableAdapter implements Movable {
-    UObject uObject;
+    private UObject uObject;
 
     public MovableAdapter(UObject uObject) {
         this.uObject = uObject;
