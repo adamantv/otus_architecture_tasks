@@ -20,4 +20,4 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Maven Verify and running tests
-        run: mvn -B clean verify
+        run: mvn -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn clean verify
