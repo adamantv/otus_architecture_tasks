@@ -1,17 +1,15 @@
 package task2.actions.rotation;
 
+import lombok.AllArgsConstructor;
 import task2.elements.UObject;
 
+@AllArgsConstructor
 public class RotatableAdapter implements Rotatable {
-    private UObject uObject;
-
-    public RotatableAdapter(UObject uObject) {
-        this.uObject = uObject;
-    }
+    private UObject<Integer> uObject;
 
     @Override
     public int getDirection() {
-        return (int) uObject.getProperty("direction");
+        return uObject.getProperty(Integer.class, "direction");
     }
 
     @Override
@@ -21,11 +19,11 @@ public class RotatableAdapter implements Rotatable {
 
     @Override
     public int getAngularVelocity() {
-        return (int) uObject.getProperty("angularVelocity");
+        return uObject.getProperty(Integer.class, "angularVelocity");
     }
 
     @Override
     public int getMaxDirections() {
-        return (int) uObject.getProperty("maxDirections");
+        return uObject.getProperty(Integer.class, "maxDirections");
     }
 }

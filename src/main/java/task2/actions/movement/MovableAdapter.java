@@ -1,23 +1,21 @@
 package task2.actions.movement;
 
+import lombok.AllArgsConstructor;
 import task2.elements.UObject;
 import task2.util.Vector;
 
+@AllArgsConstructor
 public class MovableAdapter implements Movable {
-    private UObject uObject;
-
-    public MovableAdapter(UObject uObject) {
-        this.uObject = uObject;
-    }
+    private final UObject<Vector> uObject;
 
     @Override
     public Vector getPosition() {
-        return (Vector) uObject.getProperty("position");
+        return uObject.getProperty(Vector.class, "position");
     }
 
     @Override
     public Vector getVelocity() {
-        return (Vector) uObject.getProperty("velocity");
+        return uObject.getProperty(Vector.class, "velocity");
     }
 
     @Override
