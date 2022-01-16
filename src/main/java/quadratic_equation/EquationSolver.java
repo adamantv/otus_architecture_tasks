@@ -1,4 +1,4 @@
-package task1;
+package quadratic_equation;
 
 public class EquationSolver {
     public double[] solve(double a, double b, double c, double eps) {

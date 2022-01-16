@@ -1,4 +1,4 @@
-package task1;
+package quadratic_equation;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
