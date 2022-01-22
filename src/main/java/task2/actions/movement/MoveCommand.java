@@ -7,13 +7,12 @@ import task2.util.Vector;
 
 @AllArgsConstructor
 public class MoveCommand implements Command {
+    private final Object ability;
     private final Vector vector = new Vector();
 
     @Override
-    public void execute(Object ability) {
+    public void execute() {
         if (ability instanceof Movable movable) {
-            Vector vector1 = movable.getPosition();
-            Vector vector2 = movable.getVelocity();
             movable.setPosition(vector.sum(movable.getPosition(), movable.getVelocity()));
         } else {
             throw new UnsupportedCommandException("Movable is not supported");

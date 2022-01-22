@@ -6,9 +6,10 @@ import task2.exception.UnsupportedCommandException;
 
 @AllArgsConstructor
 public class RotatableCommand implements Command {
+    private Object ability;
 
     @Override
-    public void execute(Object ability) {
+    public void execute() {
         if (ability instanceof Rotatable rotatable) {
             rotatable.setDirection((rotatable.getDirection() + rotatable.getAngularVelocity()) % rotatable.getMaxDirections());
         } else {
