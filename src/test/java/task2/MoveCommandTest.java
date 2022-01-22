@@ -2,6 +2,7 @@ package task2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import task2.actions.movement.Movable;
 import task2.actions.movement.MovableAdapter;
 import task2.actions.movement.MoveCommand;
@@ -15,18 +16,20 @@ import task2.util.Vector;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.*;
 
 public class MoveCommandTest {
     @Test
     @DisplayName("Try to change position for object with given coordinates")
     public void changePosition() {
-        GameElement gameElement = new GameElement<>();
-        gameElement.setProperty("velocity", new Vector(new int[]{12, 5}));
-        gameElement.setProperty("position", new Vector(new int[]{-7, 3}));
-        Movable movable = new MovableAdapter(gameElement);
+        Movable movable = mock(Movable.class);
+        when(movable.getVelocity()).thenReturn(new Vector(new int[]{12, 5}));
+        when(movable.getPosition()).thenReturn(new Vector(new int[]{-7, 3}));
         MoveCommand moveCommand = new MoveCommand();
         moveCommand.execute(movable);
-        assertThat(movable.getPosition()).isEqualTo(new Vector(new int[]{5, 8}));
+        ArgumentCaptor<Vector> captor = ArgumentCaptor.forClass(Vector.class);
+        verify(movable).setPosition(captor.capture());
+        assertThat(captor.getValue()).isEqualTo(new Vector(new int[]{5, 8}));
     }
 
     @Test

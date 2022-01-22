@@ -12,6 +12,8 @@ public class MoveCommand implements Command {
     @Override
     public void execute(Object ability) {
         if (ability instanceof Movable movable) {
+            Vector vector1 = movable.getPosition();
+            Vector vector2 = movable.getVelocity();
             movable.setPosition(vector.sum(movable.getPosition(), movable.getVelocity()));
         } else {
             throw new UnsupportedCommandException("Movable is not supported");

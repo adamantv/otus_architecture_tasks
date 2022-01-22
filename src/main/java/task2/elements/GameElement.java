@@ -24,4 +24,9 @@ public class GameElement<T> implements UObject<T> {
     public void setProperty(String propertyName, T newValue) {
         properties.put(propertyName, newValue);
     }
+
+    @Override
+    public Map<String, T> getProperties() {
+        return properties;
+    }
 }
