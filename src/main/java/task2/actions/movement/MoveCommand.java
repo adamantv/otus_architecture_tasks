@@ -7,11 +7,10 @@ import task2.util.Vector;
 
 @AllArgsConstructor
 public class MoveCommand implements Command {
-    private final Object ability;
     private final Vector vector = new Vector();
 
     @Override
-    public void execute() {
+    public void execute(Object ability) {
         if (ability instanceof Movable movable) {
             movable.setPosition(vector.sum(movable.getPosition(), movable.getVelocity()));
         } else {
