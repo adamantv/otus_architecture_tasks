@@ -21,7 +21,9 @@ public class CommandQueue {
                 headCommand.execute();
                 queue.remove();
             } catch (Exception e) {
-                exceptionHandler.handle(this, e, headCommand);
+                Command newCommand = exceptionHandler.handle(headCommand, e);
+                queue.add(newCommand);
+                queue.remove();
             }
         }
     }

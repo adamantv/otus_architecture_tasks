@@ -1,18 +1,15 @@
 package task2.queue;
 
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import task2.actions.Command;
 import task2.actions.repeat.RepeatCommand;
 
-import java.util.Queue;
-
-@AllArgsConstructor
+@NoArgsConstructor
 public class TwoRepeatCommandHandler implements ExceptionHandler {
-    private UtilCommandFactory utilCommandFactory;
+    private final UtilCommandFactory utilCommandFactory = new UtilCommandFactory();
 
     @Override
-    public void handle(CommandQueue commandQueue, Exception e, Command headCommand) {
-        Queue<Command> queue = commandQueue.getQueue();
+    public Command handle(Command headCommand, Exception e) {
         Command newCommand;
         if (headCommand instanceof RepeatCommand) {
             if (((RepeatCommand) headCommand).isSecond()) {
@@ -21,11 +18,9 @@ public class TwoRepeatCommandHandler implements ExceptionHandler {
                 ((RepeatCommand) headCommand).setSecond(true);
                 newCommand = headCommand;
             }
-
         } else {
             newCommand = utilCommandFactory.createRepeatCommand(headCommand);
         }
-        queue.add(newCommand);
-        queue.remove();
+        return newCommand;
     }
 }

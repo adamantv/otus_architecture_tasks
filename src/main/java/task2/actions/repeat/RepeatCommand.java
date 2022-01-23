@@ -30,6 +30,6 @@ public class RepeatCommand implements Command, Second {
     }
 
     public void setSecond(boolean second) {
-        isSecond = second;
+        this.isSecond = second;
     }
 }
