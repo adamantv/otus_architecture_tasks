@@ -15,6 +15,6 @@ public class LogCommand implements Command {
 
     @Override
     public void execute() {
-        System.out.println(this.toString());
+        System.out.println(this);
     }
 }
