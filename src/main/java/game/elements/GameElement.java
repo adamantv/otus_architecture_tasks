@@ -6,11 +6,11 @@ import game.exception.IllegalPropertyTypeException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameElement<T> implements UObject<T> {
-    private final Map<String, T> properties = new HashMap<>();
+public class GameElement implements UObject {
+    private final Map<String, Object> properties = new HashMap<>();
 
     @Override
-    public T getProperty(Class<T> cls, String propertyName) {
+    public Object getProperty(Class<?> cls, String propertyName) {
         if (!properties.containsKey(propertyName)) {
             throw new IllegalParameterException(propertyName);
         }
@@ -21,7 +21,7 @@ public class GameElement<T> implements UObject<T> {
     }
 
     @Override
-    public void setProperty(String propertyName, T newValue) {
+    public void setProperty(String propertyName, Object newValue) {
         properties.put(propertyName, newValue);
     }
 }

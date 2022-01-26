@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class RotatableAdapter implements Rotatable {
-    private UObject<Integer> uObject;
+    private UObject uObject;
 
     @Override
     public int getDirection() {
-        return uObject.getProperty(Integer.class, "direction");
+        return (int) uObject.getProperty(Integer.class, "direction");
     }
 
     @Override
@@ -19,11 +19,11 @@ public class RotatableAdapter implements Rotatable {
 
     @Override
     public int getAngularVelocity() {
-        return uObject.getProperty(Integer.class, "angularVelocity");
+        return (int) uObject.getProperty(Integer.class, "angularVelocity");
     }
 
     @Override
     public int getMaxDirections() {
-        return uObject.getProperty(Integer.class, "maxDirections");
+        return (int) uObject.getProperty(Integer.class, "maxDirections");
     }
 }

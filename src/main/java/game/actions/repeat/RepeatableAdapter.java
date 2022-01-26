@@ -6,11 +6,11 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class RepeatableAdapter implements Repeatable {
-    private final UObject<Command> uObject;
+    private final UObject uObject;
 
     @Override
     public Command getCommand() {
-        return uObject.getProperty(Command.class, "command");
+        return (Command) uObject.getProperty(Command.class, "command");
     }
 
     @Override

@@ -1,6 +1,5 @@
 package game.queue;
 
-import game.actions.Command;
 import game.actions.log.LogCommand;
 import game.actions.movement.MoveCommand;
 import game.actions.repeat.RepeatCommand;
@@ -50,7 +49,7 @@ public class CommandQueueTest {
         ExceptionHandler exceptionHandler = mock(ExceptionHandler.class);
         MoveCommand moveCommand = mock(MoveCommand.class);
         CommandQueue commandQueue = new CommandQueue(new LinkedList<>(), exceptionHandler);
-        GameElement<Command> gameElement = new GameElement<>();
+        GameElement gameElement = new GameElement();
         gameElement.setProperty("command", moveCommand);
         RepeatCommand repeatCommand = new RepeatCommand(new RepeatableAdapter(gameElement));
         commandQueue.addCommandToQueue(repeatCommand);

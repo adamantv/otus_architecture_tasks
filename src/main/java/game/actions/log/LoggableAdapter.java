@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class LoggableAdapter implements Loggable {
-    private final UObject<String> uObject;
+    private final UObject uObject;
 
     @Override
     public String getLog() {
-        return uObject.getProperty(String.class, "log");
+        return (String) uObject.getProperty(String.class, "log");
     }
 
     @Override

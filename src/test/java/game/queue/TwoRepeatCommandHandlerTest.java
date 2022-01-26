@@ -26,7 +26,7 @@ public class TwoRepeatCommandHandlerTest {
     @DisplayName("Case if need to second repeat command after first repeat command")
     void testGenerateSecondRepeatCommand() {
         TwoRepeatCommandHandler handler = new TwoRepeatCommandHandler();
-        GameElement<Command> gameElement = new GameElement<>();
+        GameElement gameElement = new GameElement();
         gameElement.setProperty("command", mock(MoveCommand.class));
         RepeatCommand repeatCommand = new RepeatCommand(new RepeatableAdapter(gameElement));
         Command newCommand = handler.handle(repeatCommand, new Exception("test"));
@@ -38,7 +38,7 @@ public class TwoRepeatCommandHandlerTest {
     @DisplayName("Case if need to use log command after second repeat command")
     void testGenerateLogCommand() {
         TwoRepeatCommandHandler handler = new TwoRepeatCommandHandler();
-        GameElement<Command> gameElement = new GameElement<>();
+        GameElement gameElement = new GameElement();
         gameElement.setProperty("command", mock(MoveCommand.class));
         RepeatCommand repeatCommand = new RepeatCommand(new RepeatableAdapter(gameElement));
         repeatCommand.setSecond(true);

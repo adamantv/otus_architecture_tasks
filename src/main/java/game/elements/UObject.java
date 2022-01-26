@@ -1,7 +1,7 @@
 package game.elements;
 
-public interface UObject<T> {
-    T getProperty(Class<T> cls, String propertyName);
+public interface UObject {
+    Object getProperty(Class<?> cls, String propertyName);
 
-    void setProperty(String propertyName, T newValue);
+    void setProperty(String propertyName, Object newValue);
 }

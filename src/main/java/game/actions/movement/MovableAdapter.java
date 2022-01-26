@@ -6,16 +6,16 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class MovableAdapter implements Movable {
-    private final UObject<Vector> uObject;
+    private final UObject uObject;
 
     @Override
     public Vector getPosition() {
-        return uObject.getProperty(Vector.class, "position");
+        return (Vector) uObject.getProperty(Vector.class, "position");
     }
 
     @Override
     public Vector getVelocity() {
-        return uObject.getProperty(Vector.class, "velocity");
+        return (Vector) uObject.getProperty(Vector.class, "velocity");
     }
 
     @Override
