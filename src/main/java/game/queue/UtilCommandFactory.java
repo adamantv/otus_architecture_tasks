@@ -2,7 +2,6 @@ package game.queue;
 
 import game.actions.Command;
 import game.actions.log.LogCommand;
-import game.actions.log.LoggableAdapter;
 import game.actions.repeat.RepeatCommand;
 import game.actions.repeat.RepeatableAdapter;
 import game.elements.GameElement;
@@ -12,9 +11,7 @@ import game.elements.GameElement;
  */
 public class UtilCommandFactory {
     public LogCommand createLogCommand(String message) {
-        GameElement gameElement = new GameElement();
-        gameElement.setProperty("log", message);
-        return new LogCommand(new LoggableAdapter(gameElement));
+        return new LogCommand(message);
     }
 
     public RepeatCommand createRepeatCommand(Command headCommand) {

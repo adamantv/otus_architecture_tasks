@@ -1,7 +1,6 @@
 package game.actions.log;
 
 import game.actions.Command;
-import game.exception.UnsupportedCommandException;
 import lombok.AllArgsConstructor;
 
 /**
@@ -9,15 +8,10 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public class LogCommand implements Command {
-    private final Object ability;
+    private final String message;
 
     @Override
     public void execute() {
-        if (ability instanceof Loggable loggable) {
-            String log = loggable.getLog();
-            System.out.println(log);
-        } else {
-            throw new UnsupportedCommandException("Loggable is not supported");
-        }
+        System.out.println(message);
     }
 }
