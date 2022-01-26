@@ -20,7 +20,7 @@ public class TwoRepeatCommandHandler implements ExceptionHandler {
         Command newCommand;
         if (headCommand instanceof RepeatCommand) {
             if (((RepeatCommand) headCommand).isSecond()) {
-                newCommand = utilCommandFactory.createLogCommand(e.getMessage());
+                newCommand = utilCommandFactory.createLogCommand(e, headCommand);
             } else {
                 ((RepeatCommand) headCommand).setSecond(true);
                 newCommand = headCommand;

@@ -10,8 +10,8 @@ import game.elements.GameElement;
  * Class for creating util commands
  */
 public class UtilCommandFactory {
-    public LogCommand createLogCommand(String message) {
-        return new LogCommand(message);
+    public LogCommand createLogCommand(Exception e, Command command) {
+        return new LogCommand(e, command);
     }
 
     public RepeatCommand createRepeatCommand(Command headCommand) {

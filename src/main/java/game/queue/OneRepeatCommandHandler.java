@@ -20,7 +20,7 @@ public class OneRepeatCommandHandler implements ExceptionHandler {
     public Command handle(Command headCommand, Exception e) {
         Command newCommand;
         if (headCommand instanceof RepeatCommand) {
-            newCommand = utilCommandFactory.createLogCommand(e.getMessage());
+            newCommand = utilCommandFactory.createLogCommand(e, headCommand);
         } else {
             newCommand = utilCommandFactory.createRepeatCommand(headCommand);
         }
