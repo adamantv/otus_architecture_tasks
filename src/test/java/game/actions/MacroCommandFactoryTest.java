@@ -11,12 +11,23 @@ import game.actions.movement.MoveCommand;
 import game.util.Vector;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.*;
 
 public class MacroCommandFactoryTest {
     @Test
-    void checkExecuteSomeCommands() {
+    void macroCommandCreate() {
+        Command command1 = mock(Command.class);
+        Command command2 = mock(Command.class);
+        Command command3 = mock(Command.class);
+        MacroCommandFactory macroCommandFactory = new MacroCommandFactory();
+        MacroCommand macroCommand = macroCommandFactory.createMacroCommand(command1, command2, command3);
+        assertThat(macroCommand.getCommands()).isNotNull().hasSize(3);
+    }
+
+    @Test
+    void macroCommandMoveTest() {
         FuelCheckable fuelCheckable = mock(FuelCheckable.class);
         when(fuelCheckable.isFuelEnough()).thenReturn(true);
         Movable movable = mock(Movable.class);
@@ -25,7 +36,7 @@ public class MacroCommandFactoryTest {
         FuelBurnable fuelBurnable = mock(FuelBurnable.class);
         doNothing().when(fuelBurnable).burnFuel();
         MacroCommandFactory macroCommandFactory = new MacroCommandFactory();
-        MacroCommand macroCommand = macroCommandFactory.createMoveBurnFuelMacroCommand(new CheckFuelCommand(fuelCheckable), new MoveCommand(movable), new BurnFuelCommand(fuelBurnable));
+        MacroCommand macroCommand = macroCommandFactory.createMacroCommand(new CheckFuelCommand(fuelCheckable), new MoveCommand(movable), new BurnFuelCommand(fuelBurnable));
         assertDoesNotThrow(macroCommand::execute);
         verify(fuelCheckable).isFuelEnough();
         verify(movable).getPosition();

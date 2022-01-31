@@ -5,7 +5,7 @@ import game.exception.UnsupportedCommandException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class RotatableCommand implements Command {
+public class RotateCommand implements Command {
     private Object ability;
 
     @Override
