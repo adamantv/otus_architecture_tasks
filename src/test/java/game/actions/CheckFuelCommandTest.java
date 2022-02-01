@@ -1,7 +1,7 @@
 package game.actions;
 
 import game.actions.fuel.CheckFuelCommand;
-import game.actions.fuel.FuelCheckable;
+import game.actions.fuel.FuelChangeable;
 import game.exception.CommandException;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 public class CheckFuelCommandTest {
     @Test
     void checkFuelCommandSuccess() {
-        FuelCheckable fuelCheckable = mock(FuelCheckable.class);
+        FuelChangeable fuelCheckable = mock(FuelChangeable.class);
         when(fuelCheckable.getFuelLevel()).thenReturn(7);
         when(fuelCheckable.getFuelBurnRate()).thenReturn(6);
         CheckFuelCommand checkFuelCommand = new CheckFuelCommand(fuelCheckable);
@@ -22,7 +22,7 @@ public class CheckFuelCommandTest {
 
     @Test
     void checkFuelCommandFailure() {
-        FuelCheckable fuelCheckable = mock(FuelCheckable.class);
+        FuelChangeable fuelCheckable = mock(FuelChangeable.class);
         when(fuelCheckable.getFuelLevel()).thenReturn(5);
         when(fuelCheckable.getFuelBurnRate()).thenReturn(6);
         CheckFuelCommand checkFuelCommand = new CheckFuelCommand(fuelCheckable);

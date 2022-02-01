@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CheckFuelCommand implements Command {
-    private final FuelCheckable fuelCheckable;
+    private final FuelChangeable fuelable;
 
     @Override
     public void execute() {
@@ -16,6 +16,6 @@ public class CheckFuelCommand implements Command {
     }
 
     private boolean isFuelEnough() {
-        return fuelCheckable.getFuelLevel() >= fuelCheckable.getFuelBurnRate();
+        return fuelable.getFuelLevel() >= fuelable.getFuelBurnRate();
     }
 }

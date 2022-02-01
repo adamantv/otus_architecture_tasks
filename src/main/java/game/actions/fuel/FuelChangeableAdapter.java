@@ -4,7 +4,7 @@ import game.elements.UObject;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class FuelBurnableAdapter implements FuelBurnable {
+public class FuelChangeableAdapter implements FuelChangeable {
     private final UObject uObject;
 
     @Override

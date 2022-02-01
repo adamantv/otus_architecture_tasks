@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class BurnFuelCommand implements Command {
-    private final FuelBurnable fuelBurnable;
+    private final FuelChangeable fuelBurnable;
 
     @Override
     public void execute() {

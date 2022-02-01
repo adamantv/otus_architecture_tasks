@@ -2,8 +2,7 @@ package game.actions;
 
 import game.actions.fuel.BurnFuelCommand;
 import game.actions.fuel.CheckFuelCommand;
-import game.actions.fuel.FuelBurnable;
-import game.actions.fuel.FuelCheckable;
+import game.actions.fuel.FuelChangeable;
 import game.actions.macro.MacroCommand;
 import game.actions.macro.MacroCommandFactory;
 import game.actions.movement.Movable;
@@ -28,20 +27,19 @@ public class MacroCommandFactoryTest {
 
     @Test
     void macroCommandMoveTest() {
-        FuelCheckable fuelCheckable = mock(FuelCheckable.class);
-        when(fuelCheckable.getFuelLevel()).thenReturn(7);
-        when(fuelCheckable.getFuelBurnRate()).thenReturn(6);
         Movable movable = mock(Movable.class);
         when(movable.getVelocity()).thenReturn(new Vector(new int[]{5, 10}));
         when(movable.getPosition()).thenReturn(new Vector(new int[]{15, 20}));
-        FuelBurnable fuelBurnable = mock(FuelBurnable.class);
-        doNothing().when(fuelBurnable).setFuelLevel(anyInt());
+        FuelChangeable fuelChangeable = mock(FuelChangeable.class);
+        when(fuelChangeable.getFuelLevel()).thenReturn(7);
+        when(fuelChangeable.getFuelBurnRate()).thenReturn(6);
+        doNothing().when(fuelChangeable).setFuelLevel(anyInt());
         MacroCommandFactory macroCommandFactory = new MacroCommandFactory();
-        MacroCommand macroCommand = macroCommandFactory.createMacroCommand(new CheckFuelCommand(fuelCheckable), new MoveCommand(movable), new BurnFuelCommand(fuelBurnable));
+        MacroCommand macroCommand = macroCommandFactory.createMacroCommand(new CheckFuelCommand(fuelChangeable), new MoveCommand(movable), new BurnFuelCommand(fuelChangeable));
         assertDoesNotThrow(macroCommand::execute);
         verify(movable).getPosition();
         verify(movable).getVelocity();
         verify(movable).setPosition(new Vector(new int[]{20, 30}));
-        verify(fuelBurnable).setFuelLevel(anyInt());
+        verify(fuelChangeable).setFuelLevel(anyInt());
     }
 }
