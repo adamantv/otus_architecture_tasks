@@ -17,7 +17,7 @@ public class ChangeVelocityCommandTest {
         when(rotatable.getAngularVelocity()).thenReturn(15);
         ChangeVelocityCommand changeVelocityCommand = new ChangeVelocityCommand(velocityMovable, rotatable);
         changeVelocityCommand.execute();
-        verify(velocityMovable).getVelocity();
+        verify(velocityMovable, times(2)).getVelocity();
         verify(rotatable).getAngularVelocity();
         verify(velocityMovable).setVelocity(any());
     }
