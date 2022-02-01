@@ -8,8 +8,8 @@ public class FuelBurnableAdapter implements FuelBurnable {
     private final UObject uObject;
 
     @Override
-    public void burnFuel() {
-        uObject.setProperty("fuel_level", this.getFuelLevel() - this.getFuelBurnRate());
+    public void setFuelLevel(int newValue) {
+        uObject.setProperty("fuel_level", newValue);
     }
 
     @Override

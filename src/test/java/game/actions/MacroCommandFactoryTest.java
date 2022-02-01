@@ -35,13 +35,13 @@ public class MacroCommandFactoryTest {
         when(movable.getVelocity()).thenReturn(new Vector(new int[]{5, 10}));
         when(movable.getPosition()).thenReturn(new Vector(new int[]{15, 20}));
         FuelBurnable fuelBurnable = mock(FuelBurnable.class);
-        doNothing().when(fuelBurnable).burnFuel();
+        doNothing().when(fuelBurnable).setFuelLevel(anyInt());
         MacroCommandFactory macroCommandFactory = new MacroCommandFactory();
         MacroCommand macroCommand = macroCommandFactory.createMacroCommand(new CheckFuelCommand(fuelCheckable), new MoveCommand(movable), new BurnFuelCommand(fuelBurnable));
         assertDoesNotThrow(macroCommand::execute);
         verify(movable).getPosition();
         verify(movable).getVelocity();
         verify(movable).setPosition(new Vector(new int[]{20, 30}));
-        verify(fuelBurnable).burnFuel();
+        verify(fuelBurnable).setFuelLevel(anyInt());
     }
 }

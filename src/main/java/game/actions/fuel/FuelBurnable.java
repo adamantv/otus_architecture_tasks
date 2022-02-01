@@ -1,7 +1,7 @@
 package game.actions.fuel;
 
 public interface FuelBurnable {
-    void burnFuel();
+    void setFuelLevel(int newValue);
 
     int getFuelLevel();
 
