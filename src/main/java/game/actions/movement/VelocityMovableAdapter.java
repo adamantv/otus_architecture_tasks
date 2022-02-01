@@ -5,7 +5,7 @@ import game.util.Vector;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class MovableAdapter implements Movable {
+public class VelocityMovableAdapter implements VelocityMovable {
     private final UObject uObject;
 
     @Override
@@ -21,5 +21,10 @@ public class MovableAdapter implements Movable {
     @Override
     public void setPosition(Vector newValue) {
         uObject.setProperty("position", newValue);
+    }
+
+    @Override
+    public void setVelocity(Vector newValue) {
+        uObject.setProperty("velocity", newValue);
     }
 }

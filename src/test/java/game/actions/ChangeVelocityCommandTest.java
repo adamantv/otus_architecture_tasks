@@ -1,8 +1,7 @@
 package game.actions;
 
-import game.actions.change.velocity.ChangeVelocityCommand;
-import game.actions.change.velocity.VelocityChangeable;
-import game.actions.movement.Movable;
+import game.actions.movement.ChangeVelocityCommand;
+import game.actions.movement.VelocityMovable;
 import game.actions.rotation.Rotatable;
 import game.util.Vector;
 import org.junit.jupiter.api.Test;
@@ -12,26 +11,26 @@ import static org.mockito.Mockito.*;
 public class ChangeVelocityCommandTest {
     @Test
     void testAllAbilitiesSupported() {
-        Movable movable = mock(Movable.class);
+        VelocityMovable velocityMovable = mock(VelocityMovable.class);
         Rotatable rotatable = mock(Rotatable.class);
-        VelocityChangeable velocityChangeable = mock(VelocityChangeable.class);
-        when(movable.getVelocity()).thenReturn(new Vector(new int[]{5, 10}));
+        when(velocityMovable.getVelocity()).thenReturn(new Vector(new int[]{5, 10}));
         when(rotatable.getAngularVelocity()).thenReturn(15);
-        ChangeVelocityCommand changeVelocityCommand = new ChangeVelocityCommand(movable, rotatable, velocityChangeable);
+        ChangeVelocityCommand changeVelocityCommand = new ChangeVelocityCommand(velocityMovable, rotatable);
         changeVelocityCommand.execute();
-        verify(movable).getVelocity();
+        verify(velocityMovable).getVelocity();
         verify(rotatable).getAngularVelocity();
-        verify(velocityChangeable).setVelocity(any());
+        verify(velocityMovable).setVelocity(any());
     }
 
     @Test
     void testMovableIsNotSupported() {
         Rotatable rotatable = mock(Rotatable.class);
-        VelocityChangeable velocityChangeable = mock(VelocityChangeable.class);
+        VelocityMovable velocityMovable = mock(VelocityMovable.class);
         when(rotatable.getAngularVelocity()).thenReturn(15);
-        ChangeVelocityCommand changeVelocityCommand = new ChangeVelocityCommand(null, rotatable, velocityChangeable);
+        when(velocityMovable.getVelocity()).thenReturn(null);
+        ChangeVelocityCommand changeVelocityCommand = new ChangeVelocityCommand(velocityMovable, rotatable);
         changeVelocityCommand.execute();
         verify(rotatable).getAngularVelocity();
-        verify(velocityChangeable).setVelocity(any());
+        verify(velocityMovable).setVelocity(any());
     }
 }

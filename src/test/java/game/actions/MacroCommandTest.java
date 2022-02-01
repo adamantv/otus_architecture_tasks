@@ -1,12 +1,20 @@
 package game.actions;
 
+import game.actions.fuel.BurnFuelCommand;
+import game.actions.fuel.CheckFuelCommand;
+import game.actions.fuel.FuelChangeable;
 import game.actions.macro.MacroCommand;
+import game.actions.movement.MoveCommand;
+import game.actions.movement.VelocityMovable;
 import game.exception.CommandException;
+import game.util.Vector;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.*;
 
 public class MacroCommandTest {
@@ -21,5 +29,31 @@ public class MacroCommandTest {
         verify(command1).execute();
         verify(command2).execute();
         verify(command3, times(0)).execute();
+    }
+
+    @Test
+    void macroCommandCreate() {
+        Command command1 = mock(Command.class);
+        Command command2 = mock(Command.class);
+        Command command3 = mock(Command.class);
+        MacroCommand macroCommand = new MacroCommand(command1, command2, command3);
+        assertThat(macroCommand.getCommands()).isNotNull().hasSize(3);
+    }
+
+    @Test
+    void macroCommandMoveTest() {
+        VelocityMovable velocityMovable = mock(VelocityMovable.class);
+        when(velocityMovable.getVelocity()).thenReturn(new Vector(new int[]{5, 10}));
+        when(velocityMovable.getPosition()).thenReturn(new Vector(new int[]{15, 20}));
+        FuelChangeable fuelChangeable = mock(FuelChangeable.class);
+        when(fuelChangeable.getFuelLevel()).thenReturn(7);
+        when(fuelChangeable.getFuelBurnRate()).thenReturn(6);
+        doNothing().when(fuelChangeable).setFuelLevel(anyInt());
+        MacroCommand macroCommand = new MacroCommand(new CheckFuelCommand(fuelChangeable), new MoveCommand(velocityMovable), new BurnFuelCommand(fuelChangeable));
+        assertDoesNotThrow(macroCommand::execute);
+        verify(velocityMovable).getPosition();
+        verify(velocityMovable).getVelocity();
+        verify(velocityMovable).setPosition(new Vector(new int[]{20, 30}));
+        verify(fuelChangeable).setFuelLevel(anyInt());
     }
 }

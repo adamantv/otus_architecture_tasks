@@ -1,8 +1,8 @@
 package game.actions;
 
-import game.actions.movement.Movable;
-import game.actions.movement.MovableAdapter;
 import game.actions.movement.MoveCommand;
+import game.actions.movement.VelocityMovable;
+import game.actions.movement.VelocityMovableAdapter;
 import game.actions.rotation.Rotatable;
 import game.actions.rotation.RotatableAdapter;
 import game.elements.GameElement;
@@ -22,7 +22,7 @@ public class MoveCommandTest {
     @Test
     @DisplayName("Try to change position for object with given coordinates")
     public void changePosition() {
-        Movable movable = mock(Movable.class);
+        VelocityMovable movable = mock(VelocityMovable.class);
         when(movable.getVelocity()).thenReturn(new Vector(new int[]{12, 5}));
         when(movable.getPosition()).thenReturn(new Vector(new int[]{-7, 3}));
         MoveCommand moveCommand = new MoveCommand(movable);
@@ -37,7 +37,7 @@ public class MoveCommandTest {
     public void impossibleReadPosition() {
         GameElement gameElement = new GameElement();
         gameElement.setProperty("velocity", new Vector(new int[]{12, 5}));
-        Movable movable = new MovableAdapter(gameElement);
+        VelocityMovable movable = new VelocityMovableAdapter(gameElement);
         MoveCommand moveCommand = new MoveCommand(movable);
         assertThatThrownBy(moveCommand::execute).isInstanceOf(IllegalParameterException.class)
                 .hasMessageContaining("position");
@@ -48,7 +48,7 @@ public class MoveCommandTest {
     public void impossibleReadVelocity() {
         GameElement gameElement = new GameElement();
         gameElement.setProperty("position", new Vector(new int[]{-7, 3}));
-        Movable movable = new MovableAdapter(gameElement);
+        VelocityMovable movable = new VelocityMovableAdapter(gameElement);
         MoveCommand moveCommand = new MoveCommand(movable);
         assertThatThrownBy(moveCommand::execute).isInstanceOf(IllegalParameterException.class)
                 .hasMessageContaining("velocity");
