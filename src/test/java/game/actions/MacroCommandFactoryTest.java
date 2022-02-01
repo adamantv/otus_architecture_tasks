@@ -4,7 +4,6 @@ import game.actions.fuel.BurnFuelCommand;
 import game.actions.fuel.CheckFuelCommand;
 import game.actions.fuel.FuelChangeable;
 import game.actions.macro.MacroCommand;
-import game.actions.macro.MacroCommandFactory;
 import game.actions.movement.Movable;
 import game.actions.movement.MoveCommand;
 import game.util.Vector;
@@ -20,8 +19,7 @@ public class MacroCommandFactoryTest {
         Command command1 = mock(Command.class);
         Command command2 = mock(Command.class);
         Command command3 = mock(Command.class);
-        MacroCommandFactory macroCommandFactory = new MacroCommandFactory();
-        MacroCommand macroCommand = macroCommandFactory.createMacroCommand(command1, command2, command3);
+        MacroCommand macroCommand = new MacroCommand(command1, command2, command3);
         assertThat(macroCommand.getCommands()).isNotNull().hasSize(3);
     }
 
@@ -34,8 +32,7 @@ public class MacroCommandFactoryTest {
         when(fuelChangeable.getFuelLevel()).thenReturn(7);
         when(fuelChangeable.getFuelBurnRate()).thenReturn(6);
         doNothing().when(fuelChangeable).setFuelLevel(anyInt());
-        MacroCommandFactory macroCommandFactory = new MacroCommandFactory();
-        MacroCommand macroCommand = macroCommandFactory.createMacroCommand(new CheckFuelCommand(fuelChangeable), new MoveCommand(movable), new BurnFuelCommand(fuelChangeable));
+        MacroCommand macroCommand = new MacroCommand(new CheckFuelCommand(fuelChangeable), new MoveCommand(movable), new BurnFuelCommand(fuelChangeable));
         assertDoesNotThrow(macroCommand::execute);
         verify(movable).getPosition();
         verify(movable).getVelocity();

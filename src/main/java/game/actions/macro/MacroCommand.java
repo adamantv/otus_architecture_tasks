@@ -12,6 +12,10 @@ import java.util.List;
 public class MacroCommand implements Command {
     private List<Command> commands;
 
+    public MacroCommand(Command... commands) {
+        this.commands = List.of(commands);
+    }
+
     @Override
     public void execute() {
         try {
