@@ -8,9 +8,9 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class ChangeVelocityCommand implements Command {
-    private Movable movable;
-    private Rotatable rotatable;
-    private VelocityChangeable velocityChangeable;
+    private final Movable movable;
+    private final Rotatable rotatable;
+    private final VelocityChangeable velocityChangeable;
 
     @Override
     public void execute() {
