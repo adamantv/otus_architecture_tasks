@@ -16,9 +16,4 @@ public class FuelCheckableAdapter implements FuelCheckable {
     public int getFuelBurnRate() {
         return (int) uObject.getProperty(Integer.class, "fuel_burn_rate");
     }
-
-    @Override
-    public boolean isFuelEnough() {
-        return this.getFuelLevel() >= this.getFuelBurnRate();
-    }
 }
