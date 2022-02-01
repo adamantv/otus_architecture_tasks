@@ -4,10 +4,14 @@ import game.actions.fuel.BurnFuelCommand;
 import game.actions.fuel.CheckFuelCommand;
 import game.actions.fuel.FuelChangeable;
 import game.actions.macro.MacroCommand;
+import game.actions.movement.ChangeVelocityCommand;
 import game.actions.movement.MoveCommand;
 import game.actions.movement.VelocityMovable;
+import game.actions.rotation.Rotatable;
+import game.actions.rotation.RotateCommand;
 import game.exception.CommandException;
 import game.util.Vector;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -19,6 +23,7 @@ import static org.mockito.Mockito.*;
 
 public class MacroCommandTest {
     @Test
+    @DisplayName("Check case if command sequence stopped, and MacroCommand throws a CommandException")
     void checkInterruptMacroCommand() {
         Command command1 = mock(Command.class);
         Command command2 = mock(Command.class);
@@ -32,6 +37,7 @@ public class MacroCommandTest {
     }
 
     @Test
+    @DisplayName("Check MacroCommand creates correctly")
     void macroCommandCreate() {
         Command command1 = mock(Command.class);
         Command command2 = mock(Command.class);
@@ -41,6 +47,7 @@ public class MacroCommandTest {
     }
 
     @Test
+    @DisplayName("Check MacroCommand for straight movement with fuel consumption")
     void macroCommandMoveTest() {
         VelocityMovable velocityMovable = mock(VelocityMovable.class);
         when(velocityMovable.getVelocity()).thenReturn(new Vector(new int[]{5, 10}));
@@ -55,5 +62,22 @@ public class MacroCommandTest {
         verify(velocityMovable).getVelocity();
         verify(velocityMovable).setPosition(new Vector(new int[]{20, 30}));
         verify(fuelChangeable).setFuelLevel(anyInt());
+    }
+
+    @Test
+    @DisplayName("Check MacroCommand of rotation, when also changed velocity vector, if exists")
+    void macroCommandRotateTest() {
+        Rotatable rotatable = mock(Rotatable.class);
+        when(rotatable.getAngularVelocity()).thenReturn(30);
+        when(rotatable.getDirection()).thenReturn(1);
+        when(rotatable.getMaxDirections()).thenReturn(5);
+        RotateCommand rotateCommand = new RotateCommand(rotatable);
+        VelocityMovable velocityMovable = mock(VelocityMovable.class);
+        when(velocityMovable.getVelocity()).thenReturn(new Vector(new int[]{5, 10}));
+        ChangeVelocityCommand changeVelocityCommand = new ChangeVelocityCommand(velocityMovable, rotatable);
+        MacroCommand macroCommand = new MacroCommand(rotateCommand, changeVelocityCommand);
+        macroCommand.execute();
+        verify(rotatable).setDirection(anyInt());
+        verify(velocityMovable).setVelocity(any(Vector.class));
     }
 }

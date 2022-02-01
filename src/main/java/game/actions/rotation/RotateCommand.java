@@ -1,19 +1,14 @@
 package game.actions.rotation;
 
 import game.actions.Command;
-import game.exception.UnsupportedCommandException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class RotateCommand implements Command {
-    private Object ability;
+    private Rotatable rotatable;
 
     @Override
     public void execute() {
-        if (ability instanceof Rotatable rotatable) {
-            rotatable.setDirection((rotatable.getDirection() + rotatable.getAngularVelocity()) % rotatable.getMaxDirections());
-        } else {
-            throw new UnsupportedCommandException("Movable is not supported");
-        }
+        rotatable.setDirection((rotatable.getDirection() + rotatable.getAngularVelocity()) % rotatable.getMaxDirections());
     }
 }
