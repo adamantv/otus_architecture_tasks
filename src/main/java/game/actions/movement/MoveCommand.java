@@ -12,7 +12,7 @@ public class MoveCommand implements Command {
 
     @Override
     public void execute() {
-        if (ability instanceof Movable movable) {
+        if (ability instanceof VelocityMovable movable) {
             movable.setPosition(vector.sum(movable.getPosition(), movable.getVelocity()));
         } else {
             throw new UnsupportedCommandException("Movable is not supported");
